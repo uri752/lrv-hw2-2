@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Groups details</title>
+    <title>Student details</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 <body>          
-    {{-- Данне о студенте --}}    
+    {{-- Данные о студенте --}}    
     <div>
-        <p>Фамилия: {{$data->surname}}</p>
-        <p>Имя: {{$data->name}}</p>
-        <p><small>Дата создания:{{$data->created_at ?? '-'}}</small></p>        
-        <p><small>Дата обновления:{{$data->update_at ?? '-'}}</small></p>        
+        <p>Фамилия: {{$student_data->surname}}</p>
+        <p>Имя: {{$student_data->name}}</p>
+        <p><small>Дата создания:{{$student_data->created_at ?? '-'}}</small></p>        
+        <p><small>Дата обновления:{{$student_data->update_at ?? '-'}}</small></p>        
     </div>       
 </body>
 </html>

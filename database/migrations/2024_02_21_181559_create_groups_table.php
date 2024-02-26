@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->default(''); // Название группы
+            
+            // Доработка-1 изменить default('') на nullable() 
+            $table->string('title')->nullable(); // Название группы
+            
             $table->date('start_from'); //Дата начала обучения
             $table->boolean('is_active'); // Начала ли группа свое обучение
             $table->timestamps();

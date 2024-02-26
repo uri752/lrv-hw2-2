@@ -21,16 +21,16 @@
         <th>updated_at</th>
     </thead>
     <tbody>
-        @foreach($table as $el)       
+        @foreach($groups as $group)       
             <tr>
-                <td>{{ $el->id }}</td>
-                <td>{{ $el->title }}</td>
-                <td>{{ $el->start_from }}</td>
-                <td>{{ $el->is_active }}</td>
-                <td>{{ $el->created_at ?? '-' }}</td>
-                <td>{{ $el->updated_at ?? '-'}}</td>
+                <td>{{ $group->id }}</td>
+                <td>{{ $group->title }}</td>
+                <td>{{ $group->start_from }}</td>
+                <td>{{ $group->is_active }}</td>
+                <td>{{ $group->created_at ?? '-' }}</td>
+                <td>{{ $group->updated_at ?? '-'}}</td>
                 <td>    
-                    <a href="{{ route('groups.details', $el->id) }}"><button>Детали</button></a>
+                    <a href="{{ route('groups.details', $group->id) }}"><button>Детали</button></a>
                 </td>
             </tr>        
         @endforeach

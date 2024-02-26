@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Students;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateRequestStudent;
 
@@ -28,7 +28,7 @@ class StudentController extends Controller
 
     public function add(CreateRequestStudent $request, $group)
     {                        
-        $stident = new Students();
+        $stident = new Student();
         $stident->group_id = $group;
         $stident->surname = $request->input('surname');
         $stident->name = $request->input('name');
@@ -49,7 +49,7 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Students $students)
+    public function show(Student $students)
     {
         //
     }
@@ -60,14 +60,14 @@ class StudentController extends Controller
     //public function edit(Students $students)
     public function edit($group, $student)
     {
-        $data = Students::find($student);           
-        return view('/students/details',['data'=>$data]); 
+        $student_data = Student::find($student);           
+        return view('/students/details',['student_data'=>$student_data]); 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Students $students)
+    public function update(Request $request, Student $students)
     {
         //
     }
@@ -75,7 +75,7 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Students $students)
+    public function destroy(Student $students)
     {
         //
     }

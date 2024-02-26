@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Groups;
+use App\Models\Group;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateRequest;
 
@@ -13,8 +13,10 @@ class GroupController extends Controller
      */
     public function index()
     {        
-        $table = Groups::all();
-        return view('groups.index',['table'=>$table]);
+        // Доработка - правильно именновать переменные, чтобы отражали смысл хранимых данных
+        //$table = Groups::all();
+        $groups = Group::all();
+        return view('groups.index',['groups'=>$groups]);
     }
 
     /**
@@ -29,17 +31,13 @@ class GroupController extends Controller
     {
         //dd($request);        
 
-        $group = new Groups();
+        $group = new Group();
         $group->title = $request->input('title');
         $group->start_from = $request->input('start_from');
         
-        if ($request->input('is_active') === null) {
-            $is_active = false; 
-        } else {
-            $is_active =  $request->input('is_active');
-        }
+        // Доработка - заменить громоздкую конструкцию проверки условия на input с дефолтным значением       
+        $group->is_active = $request->input('is_active', false);
 
-        $group->is_active = $is_active;
         $group->save();
 
         return redirect()->route('home')->with('success',"Новая группа успешно добавлена");
@@ -56,7 +54,7 @@ class GroupController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Groups $groups)
+    public function show(Group $groups)
     {                
         //                
     }
@@ -66,9 +64,9 @@ class GroupController extends Controller
      */
     public function edit($id)
     {                 
-        $data = Groups::find($id);   
-        $table = $data->students;         
-        return view('/groups/details',['data'=>$data, 'table'=>$table]); 
+        $group = Group::find($id);   
+        $students = $group->students;         
+        return view('/groups/details',['group'=>$group, 'students'=>$students]); 
     }
 
     /**
@@ -82,7 +80,7 @@ class GroupController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Groups $groups)
+    public function destroy(Group $groups)
     {
         //
     }

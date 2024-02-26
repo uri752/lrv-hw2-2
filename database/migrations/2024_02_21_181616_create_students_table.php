@@ -13,13 +13,17 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('group_id')->nullable(); // ID группы // Внешний ключ для группы студента (foreign key)
-            $table->string('surname')->default(''); // Фамилия студента
-            $table->string('name')->default(''); // Имя студента            
+            
+            // Доработка-3 - Для внешних ключей указать ->cascadeOnDelete() или ->nullOnDelete()
+            $table->unsignedBigInteger('group_id')->cascadeOnDelete()->nullable(); // ID группы // Внешний ключ для группы студента (foreign key)
+            
+            $table->string('surname')->nullable(); //default(''); // Фамилия студента
+            $table->string('name')->nullable(); //default(''); // Имя студента            
             $table->timestamps();
             
-            $table->index('group_id', 'student_gropu_idx');
-            $table->foreign('group_id', 'student_category_fk')->on('groups')->references('id');
+            // Доработка-2 - Необязательно указывать имена для индекса и внешнего ключа, Ларавель сделает это сам
+            //$table->index('group_id', 'student_gropu_idx');
+            //$table->foreign('group_id', 'student_category_fk')->on('groups')->references('id');
         });
     }
 

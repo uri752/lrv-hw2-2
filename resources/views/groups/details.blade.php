@@ -9,16 +9,16 @@
 </head>
 <body>          
 {{-- Данне о группе --}}    
-<h1>{{$data->title}}</h1>
+<h1>{{$group->title}}</h1>
     <div class="alert alert-info">
-        <p>Дата начала: {{$data->start_from ?? '-'}}</p>
-        <p>Занятия начаты:{{$data->is_active}}</p>        
+        <p>Дата начала: {{$group->start_from ?? '-'}}</p>
+        <p>Занятия начаты:{{$group->is_active}}</p>        
         
-        <p><small>Дата создания:{{$data->created_at ?? '-'}}</small></p>        
-        <p><small>Дата обновления:{{$data->update_at ?? '-'}}</small></p>        
+        <p><small>Дата создания:{{$group->created_at ?? '-'}}</small></p>        
+        <p><small>Дата обновления:{{$group->update_at ?? '-'}}</small></p>        
     </div>
     {{-- Данные о студентах группы --}}
-    <a href="{{ route('students.create',['group'=>$data->id]) }}"><button>Создать нового студента</button></a>                    
+    <a href="{{ route('students.create',['group'=>$group->id]) }}"><button>Создать нового студента</button></a>                    
     <table>
         <thead>        
             <th>id</th>
@@ -29,16 +29,16 @@
             <th>updated_at</th>
         </thead>
         <tbody>
-            @foreach($table as $el)       
+            @foreach($students as $student)       
                 <tr>
-                    <td>{{ $el->id }}</td>
-                    <td>{{ $el->group_id }}</td>
-                    <td>{{ $el->surname }}</td>
-                    <td>{{ $el->name }}</td>                    
-                    <td>{{ $el->created_at ?? '-' }}</td>
-                    <td>{{ $el->updated_at ?? '-'}}</td>
+                    <td>{{ $student->id }}</td>
+                    <td>{{ $student->group_id }}</td>
+                    <td>{{ $student->surname }}</td>
+                    <td>{{ $student->name }}</td>                    
+                    <td>{{ $student->created_at ?? '-' }}</td>
+                    <td>{{ $student->updated_at ?? '-'}}</td>
                     <td>    
-                        <a href="{{ route('students.details', ['group'=>$data->id,'student'=>$el->id]) }}"><button>Детали</button></a>
+                        <a href="{{ route('students.details', ['group'=>$group->id,'student'=>$student->id]) }}"><button>Детали</button></a>
                     </td>
                 </tr>        
             @endforeach
